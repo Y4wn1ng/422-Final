@@ -33,5 +33,7 @@ if (!fs.existsSync(processed)) {
     fs.mkdirSync(processed);
 }
 
+console.info('\x1b[38;2;0;0;170m%s\x1b[0m', 'Ensured necessary directories exist/are created');
+
 //starts watching the directories. 
 watcher.watch(watched, output, processed);

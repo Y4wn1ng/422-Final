@@ -36,7 +36,10 @@ module.exports = {
         watcher
             .on('add', (path) => {
                 parser.processChange(path);
+                console.info('\x1b[38;2;0;0;170m%s\x1b[0m', `Added: ${path}`);
             })
-            .on('error', (err) => { });
+            .on('error', (err) => {
+                console.error('\x1b[38;2;255;0;0m%s\x1b[0m', 'Watcher error:', err);
+            });
     }
 };
