@@ -4,6 +4,7 @@ const config = require('./config.json');
 
 const watcher = require('./watcher');
 
+//ensure exit handler is set and will exit safely. 
 const exitHandler = require('./exitHandler');
 exitHandler.setSafeExits();
 
@@ -32,4 +33,5 @@ if (!fs.existsSync(processed)) {
     fs.mkdirSync(processed);
 }
 
+//starts watching the directories. 
 watcher.watch(watched, output, processed);
