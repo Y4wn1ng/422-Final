@@ -3,7 +3,7 @@ const sinon = require('sinon');
 
 describe('watcher module', () => {
     it('sets parser watched/output/processed when watch is started', () => {
-        const proxyquire = require('proxyquire');
+        const proxyRequire = require('proxyRequire');
 
         const parser = {
             setWatched: sinon.spy(),
@@ -19,8 +19,8 @@ describe('watcher module', () => {
             };
         };
 
-        proxyquire.noCallThru();
-        const watcher = proxyquire('../src/watcher', {
+        proxyRequire.noCallThru();
+        const watcher = proxyRequire('../src/watcher', {
             './parser': parser,
             'chokidar': { watch: fakeWatcherConstructor }
         });
@@ -34,8 +34,9 @@ describe('watcher module', () => {
     });
 
     it('calls parser.processChange when chokidar emits add', () => {
-        const proxyquire = require('proxyquire');
+        const proxyRequire = require('proxyquire');
 
+        //this will create a fake parser module
         const parser = {
             setWatched: sinon.spy(),
             setOutput: sinon.spy(),
@@ -43,7 +44,7 @@ describe('watcher module', () => {
             processChange: sinon.spy()
         };
 
-        // create a fake watcher constructor that captures handlers and allows simulating events
+        // creates a fake watcher constructor that captures handlers and allows simulating events
         let capturedAddHandler = null;
         const fakeWatcherConstructor = (watched, opts) => {
             return {
@@ -54,15 +55,15 @@ describe('watcher module', () => {
             };
         };
 
-        proxyquire.noCallThru();
-        const watcher = proxyquire('../src/watcher', {
+        proxyRequire.noCallThru();
+        const watcher = proxyRequire('../src/watcher', {
             './parser': parser,
             'chokidar': { watch: fakeWatcherConstructor }
         });
 
         watcher.watch('/watched', '/out', '/processed');
 
-        // simulate an 'add' event
+        // simulates an 'add' event
         assert.ok(typeof capturedAddHandler === 'function', 'add handler should be captured');
         capturedAddHandler('/some/path/file.csv');
 
