@@ -1,3 +1,1 @@
-# 422-Final
-ISTE 422 Exam on May 4th 2026
-Evan Ke 
+# Write your Readme here; explaining how to use this app
