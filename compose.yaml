@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  my-app:
+    image: my-app-image:latest
+    volumes:
+      # Map local './data/inbound' to '/app/inbound' in container
+      - ./data/inbound:/app/inbound
+      - ./data/outbound:/app/outbound
+      - ./data/processed:/app/processed
